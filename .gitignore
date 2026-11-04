@@ -1,0 +1,23 @@
+
+# Dependências
+node_modules/
+**/node_modules/
+
+# Segredos e variáveis de ambiente
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+
+# Arquivos gerados
+**/dist/
+**/build/
+coverage/
+*.log
+
+# Configurações locais
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

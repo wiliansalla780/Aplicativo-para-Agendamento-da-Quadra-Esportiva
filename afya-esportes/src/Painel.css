@@ -1,0 +1,248 @@
+/* ===== Painel do diretor + status de aprovação ===== */
+
+/* Selos de status (complementam .status do App.css) */
+.status-pendente {
+    color: #8a5a00;
+    background: #fff4d9;
+  }
+  
+  .status-aprovado {
+    color: #24734a;
+    background: #eaf7ef;
+  }
+  
+  .status-reprovado {
+    color: #a3122f;
+    background: #fdebee;
+  }
+  
+  .status-cancelado {
+    color: #6f6873;
+    background: #f0eef1;
+  }
+  
+  /* Contador (bolinha) nos botões e filtros */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    margin-left: 8px;
+    padding: 0 6px;
+    color: #fff;
+    background: var(--afya);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  
+  .painel-toggle:hover:not(:disabled) .badge {
+    color: var(--afya);
+    background: #fff;
+  }
+  
+  /* Filtros do painel */
+  .painel-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .painel-filtro {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 16px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: border-color 0.18s, background 0.18s, color 0.18s;
+  }
+  
+  .painel-filtro:hover:not(:disabled) {
+    color: var(--afya);
+    border-color: var(--afya);
+  }
+  
+  .painel-filtro.ativo {
+    color: #fff;
+    background: var(--afya);
+    border-color: var(--afya);
+  }
+  
+  .painel-filtro.ativo .badge {
+    color: var(--afya);
+    background: #fff;
+  }
+  
+  .painel-atualizar {
+    margin-left: auto;
+    color: var(--muted);
+  }
+  
+  /* Cards do painel */
+  .painel-email {
+    overflow-wrap: anywhere;
+    color: var(--muted);
+    font-size: 11px;
+  }
+  
+  .painel-acoes,
+  .reservation-note {
+    grid-column: 1 / -1;
+  }
+  
+  .reservation-note {
+    margin: 0;
+    padding: 11px 13px;
+    color: #8e1747;
+    background: #fbedf2;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+  .reservation-note-info {
+    color: #8a5a00;
+    background: #fff8e6;
+  }
+  
+  .painel-acoes {
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  
+  .painel-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .painel-botoes button,
+  .btn-cancelar {
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.18s, color 0.18s, border-color 0.18s;
+  }
+  
+  .painel-botoes button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .btn-aprovar {
+    color: #fff;
+    background: #24734a;
+  }
+  
+  .btn-aprovar:hover:not(:disabled) {
+    background: #1b5c3a;
+  }
+  
+  .btn-reprovar {
+    color: #fff;
+    background: #b4233f;
+  }
+  
+  .btn-reprovar:hover:not(:disabled) {
+    background: #8f1a31;
+  }
+  
+  .btn-reprovar-outline {
+    color: #b4233f;
+    background: #fff;
+    border-color: #e8b9c2 !important;
+  }
+  
+  .btn-reprovar-outline:hover:not(:disabled) {
+    background: #fdebee;
+  }
+  
+  .btn-neutro {
+    color: var(--ink);
+    background: #fff;
+    border-color: var(--border) !important;
+  }
+  
+  .painel-motivo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .painel-motivo label {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .painel-motivo textarea {
+    width: 100%;
+    padding: 11px 13px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 13px;
+    resize: vertical;
+  }
+  
+  .painel-motivo textarea:focus {
+    border-color: var(--afya);
+    outline: none;
+  }
+  
+  /* Status + botão "Cancelar" na lista "Minhas reservas" */
+  .reservation-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  
+  .btn-cancelar {
+    min-height: 32px;
+    padding: 0 14px;
+    color: #b4233f;
+    background: #fff;
+    border-color: #e8b9c2;
+    font-size: 12px;
+  }
+  
+  .btn-cancelar:hover {
+    background: #fdebee;
+  }
+  
+  /* Painel: botão de status ocupa a última coluna igual às demais listas */
+  .painel-item {
+    align-items: start;
+  }
+  
+  @media (max-width: 760px) {
+    .reservation-side {
+      align-items: flex-start;
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: center;
+    }
+  
+    .painel-atualizar {
+      margin-left: 0;
+    }
+  
+    .painel-botoes button {
+      flex: 1 1 140px;
+    }
+  }
