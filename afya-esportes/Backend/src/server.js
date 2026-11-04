@@ -1,4 +1,3 @@
-
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
@@ -10,20 +9,30 @@ import Agendamento from './models/Agendamento.js';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Configuração flexível de CORS para aceitar conexões locais e do frontend publicado
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  process.env.FRONTEND_URL, // Define no Render quando publicar o frontend (ex: https://seu-frontend.vercel.app)
+].filter(Boolean); // Remove valores vazios/undefined
 
-app.use(cors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:5174',
-    ],
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Permite chamadas sem origin (ex: Postman, ferramentas de teste) ou se a origem estiver na lista
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Bloqueado pelas políticas de CORS'));
+      }
+    },
     credentials: true,
-  }));
-  
+  })
+);
 
 app.use(express.json());
 
 app.use('/api/agendamentos', agendamentosRouter);
-
 app.use('/api/auth', authRouter);
 
 app.get('/', (req, res) => {
