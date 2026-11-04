@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import './Painel.css'
 
-const API_URL = 'https://aplicativo-para-agendamento-da-quadra.onrender.com/api/agendamentos'
-const AUTH_URL = 'https://aplicativo-para-agendamento-da-quadra.onrender.com/api/auth'
+const BASE_URL = 'https://aplicativo-para-agendamento-da-quadra.onrender.com';
+const API_URL = `${BASE_URL}/api/agendamentos`;
+const AUTH_URL = `${BASE_URL}/api/auth`;
 
 const horarios = [
   '08:00', '09:00', '10:00', '11:00',

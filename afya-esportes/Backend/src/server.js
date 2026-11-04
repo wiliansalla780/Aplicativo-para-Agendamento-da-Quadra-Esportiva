@@ -10,17 +10,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Configuração flexível de CORS para aceitar conexões locais e do frontend publicado
+// Configuração flexível de CORS para aceitar localhost, rede local e frontend publicado
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5174',
-  process.env.FRONTEND_URL, // Define no Render quando publicar o frontend (ex: https://seu-frontend.vercel.app)
-].filter(Boolean); // Remove valores vazios/undefined
+  process.env.FRONTEND_URL,
+].filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Permite chamadas sem origin (ex: Postman, ferramentas de teste) ou se a origem estiver na lista
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      // Permite chamadas sem origin (Postman) ou se estiver na lista permitida
+      // Também permite automaticamente qualquer IP local da rede (192.168.x.x ou 10.x.x.x) nas portas do Vite
+      const isLocalNetwork = origin && /^http:\/\/(192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.\d{1,3}\.\d{1,3}\.\d{1,3}):(5173|5174)$/.test(origin);
+
+      if (!origin || allowedOrigins.indexOf(origin) !== -1 || isLocalNetwork) {
         callback(null, true);
       } else {
         callback(new Error('Bloqueado pelas políticas de CORS'));
